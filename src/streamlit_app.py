@@ -12,7 +12,7 @@ st.title("🧭 Buscador de Servicios y Comisarías")
 def cargar_datos():
     establecimientos = pd.read_excel('./assets/establecimientos_consolidados.xlsx')
     comisarias = pd.read_excel('./assets/comisarias.xlsx')
-    ubigeos = pd.read_excel('./assets/ubigeos.xlsx')
+    ubigeos = pd.read_excel('./assets/ubigeos_peru.xlsx')
     return establecimientos, comisarias, ubigeos
 
 # --- NORMALIZACIÓN ---
