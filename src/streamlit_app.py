@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+from unidecode import unidecode
 
 # --- CONFIGURACIÓN INICIAL ---
 st.set_page_config(page_title="Servicios de ayuda y comisarías", layout="wide")
