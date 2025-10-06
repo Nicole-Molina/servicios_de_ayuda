@@ -101,7 +101,6 @@ st.markdown("""
     📱 Puedes acceder a ellos desde tu celular o computadora en cualquier momento.
     """)
 
-)
 
 # --- RESUMEN ---
 st.markdown("---")
