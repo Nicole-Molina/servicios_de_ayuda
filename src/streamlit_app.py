@@ -10,29 +10,9 @@ st.title("🧭 Buscador de Servicios y Comisarías")
 # --- CARGA DE DATOS ---
 @st.cache_data
 def cargar_datos():
-    # Directorio base: la carpeta donde está streamlit_app.py
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    # Carpeta donde están los archivos de datos
-    ASSETS_DIR = os.path.join(BASE_DIR, '..', 'assets')
-
-    # Cargar establecimientos consolidados
-    est_file = os.path.join(ASSETS_DIR, 'establecimientos_consolidados.xlsx')
-    establecimientos = pd.read_excel(est_file)
-
-    # Cargar comisarías
-    com_file = os.path.join(ASSETS_DIR, 'comisarias.xlsx')
-    comisarias = pd.read_excel(com_file)
-
-    # Cargar ubigeos
-    ubigeos_file = os.path.join(ASSETS_DIR, 'ubigeos.xlsx')
-    ubigeos = pd.read_excel(ubigeos_file)
-
-    # Opcional: asegurarse de que los textos estén en mayúscula y sin tildes
-    for df in [establecimientos, comisarias, ubigeos]:
-        df.columns = [unidecode(col.upper()) for col in df.columns]
-        for col in df.select_dtypes(include='object').columns:
-            df[col] = df[col].apply(lambda x: unidecode(str(x).upper()) if pd.notnull(x) else x)
-
+    establecimientos = pd.read_excel('./assets/establecimientos_consolidados.xlsx')
+    comisarias = pd.read_excel('./assets/comisarias.xlsx')
+    ubigeos = pd.read_excel('./assets/ubigeos.xlsx')
     return establecimientos, comisarias, ubigeos
 
 # --- NORMALIZACIÓN ---
