@@ -15,6 +15,9 @@ def cargar_datos():
     ubigeos = pd.read_excel('./assets/ubigeos_peru.xlsx')
     return establecimientos, comisarias, ubigeos
 
+# Llamamos a la función y guardamos los DataFrames
+establecimientos, comisarias, ubigeos = cargar_datos()
+
 # --- NORMALIZACIÓN ---
 for df in [establecimientos, comisarias, ubigeos]:
     df.columns = df.columns.str.upper()
