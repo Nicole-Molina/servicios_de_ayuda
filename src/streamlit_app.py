@@ -15,6 +15,9 @@ def cargar_datos():
     ubigeos = pd.read_excel('./assets/ubigeos_peru.xlsx')
     return establecimientos, comisarias, ubigeos
 
+# --- BOTÓN PARA LIMPIAR CACHÉ Y RECARGAR ---
+st.sidebar.button("🔄 Refrescar datos", on_click=lambda: st.cache_data.clear())
+
 # Llamamos a la función y guardamos los DataFrames
 establecimientos, comisarias, ubigeos = cargar_datos()
 
