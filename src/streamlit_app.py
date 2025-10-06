@@ -5,7 +5,7 @@ from unidecode import unidecode
 # --- CONFIGURACIÓN INICIAL ---
 st.set_page_config(page_title="Servicios de ayuda y comisarías", layout="wide")
 
-st.title("🧭 Buscador de Servicios y Comisarías")
+st.title("🔍 Buscador de servicios de ayuda y comisarías")
 
 # --- CARGA DE DATOS ---
 @st.cache_data
@@ -69,7 +69,7 @@ establecimientos_filtrado = filtrar_datos(establecimientos)
 comisarias_filtrado = filtrar_datos(comisarias)
 
 # --- RESULTADOS ---
-st.subheader("🏥 Servicios de ayuda disponibles")
+st.subheader("♀️ Servicios de ayuda disponibles")
 st.dataframe(establecimientos_filtrado, use_container_width=True)
 
 st.download_button(
@@ -87,6 +87,20 @@ st.download_button(
     data=comisarias_filtrado.to_csv(index=False).encode('utf-8'),
     file_name="comisarias_filtradas.csv",
     mime="text/csv"
+)
+
+st.subheader("🌐 Canales digitales")
+
+st.markdown("""
+    Estos son algunos canales digitales donde puedes acceder a servicios de apoyo o realizar denuncias en línea:
+
+    - **Línea 100:** Marcar 100 desde tu celular o teléfono fijo — Atención gratuita 24 horas para personas que experimenten o conozcan casos de violencia.  
+    - **Central única de denuncias:** Marcar 1818 desde tu celular o teléfono fijo — Canal de consulta y/o denuncia abierto a casos de violencia.  
+    - **Chat 100:** [https://chat100.warminan.gob.pe/] — Chat gratuito 24 horas para orientación gratuita respecto de prevención y ayuda en situaciones de violencia.    
+
+    📱 Puedes acceder a ellos desde tu celular o computadora en cualquier momento.
+    """)
+
 )
 
 # --- RESUMEN ---
