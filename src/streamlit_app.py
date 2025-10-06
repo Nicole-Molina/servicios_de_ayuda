@@ -9,9 +9,9 @@ st.title("🧭 Buscador de Servicios y Comisarías")
 # --- CARGA DE DATOS ---
 @st.cache_data
 def cargar_datos():
-    establecimientos = pd.read_excel(r'../03. Outputs/establecimientos_consolidados.xlsx')
-    comisarias = pd.read_excel(r'../03. Outputs/comisarias.xlsx')
-    ubigeos = pd.read_csv(r'../03. Outputs/ubigeos_peru.xlsx', sep=';', encoding='latin-1', nrows=1892)
+    establecimientos = pd.read_excel(r'../assets/establecimientos_consolidados.xlsx')
+    comisarias = pd.read_excel(r'../assets/comisarias.xlsx')
+    ubigeos = pd.read_csv(r'../assets/ubigeos_peru.xlsx', sep=';', encoding='latin-1', nrows=1892)
     return establecimientos, comisarias, ubigeos
 
 establecimientos, comisarias, ubigeos = cargar_datos()
