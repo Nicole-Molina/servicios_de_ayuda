@@ -96,7 +96,7 @@ st.markdown("""
 
     - **Línea 100:** Marcar 100 desde tu celular o teléfono fijo — Atención gratuita 24 horas para personas que experimenten o conozcan casos de violencia.  
     - **Central única de denuncias:** Marcar 1818 desde tu celular o teléfono fijo — Canal de consulta y/o denuncia abierto a casos de violencia.  
-    - **Chat 100:** [https://chat100.warminan.gob.pe/] — Chat gratuito 24 horas para orientación gratuita respecto de prevención y ayuda en situaciones de violencia.    
+    - **Chat 100:** https://chat100.warminan.gob.pe/ — Chat gratuito 24 horas para orientación gratuita respecto de prevención y ayuda en situaciones de violencia.    
 
     📱 Puedes acceder a ellos desde tu celular o computadora en cualquier momento.
     """)
