@@ -73,21 +73,31 @@ comisarias_filtrado = filtrar_datos(comisarias)
 st.subheader("♀️ Servicios de ayuda disponibles")
 st.dataframe(establecimientos_filtrado, use_container_width=True)
 
+output_servicios = io.BytesIO()
+with pd.ExcelWriter(output_servicios, engine="openpyxl") as writer:
+    establecimientos_filtrado.to_excel(writer, index=False, sheet_name="Servicios de ayuda")
+output_servicios.seek(0)
+
 st.download_button(
     label="⬇️ Descargar servicios filtrados (Excel)",
-    data=establecimientos_filtrado.to_csv(index=False).encode('utf-8'),
-    file_name="servicios_filtrados.csv",
-    mime="text/csv"
+    data=output_servicios,
+    file_name="servicios_filtrados.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
 st.subheader("👮 Comisarías disponibles")
 st.dataframe(comisarias_filtrado, use_container_width=True)
 
+output_comisarias = io.BytesIO()
+with pd.ExcelWriter(output_comisarias, engine="openpyxl") as writer:
+    comisarias_filtrado.to_excel(writer, index=False, sheet_name="Comisarías")
+output_comisarias.seek(0)
+
 st.download_button(
     label="⬇️ Descargar comisarías filtradas (Excel)",
-    data=comisarias_filtrado.to_csv(index=False).encode('utf-8'),
-    file_name="comisarias_filtradas.csv",
-    mime="text/csv"
+    data=output_comisarias,
+    file_name="comisarias_filtradas.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
 # --- DESCARGA CONSOLIDADA ---
