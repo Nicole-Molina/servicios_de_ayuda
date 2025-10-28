@@ -107,8 +107,8 @@ comisarias_out["TIPO"] = "COMISARIA"
 consolidado = pd.concat([servicios_out, comisarias_out], ignore_index=True)
 
 # Eliminar columnas
-df = df.drop(columns=["CATEGORIA"])
-df = df.drop(columns=["COMISARIA"])
+consolidado = consolidado.drop(columns=["CATEGORIA"])
+consolidado = consolidado.drop(columns=["COMISARIA"])
 
 # Asegurar que todos los NaN (si quedaran) estén cubiertos
 consolidado.fillna("NO DISPONIBLE", inplace=True)
