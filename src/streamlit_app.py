@@ -116,7 +116,7 @@ consolidado.fillna("NO DISPONIBLE", inplace=True)
 
 # Botón de descarga consolidado
 output = io.BytesIO()
-with pd.ExcelWriter(output, engine="xlsxwriter") as writer:
+with pd.ExcelWriter(output, engine="openpyxl") as writer:
     consolidado.to_excel(writer, index=False, sheet_name="Resultados")
 output.seek(0)
 
