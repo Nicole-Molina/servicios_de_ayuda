@@ -99,13 +99,6 @@ comisarias_out = comisarias_filtrado.copy()
 # En comisarías: crear la columna ESTABLECIMIENTO a partir de COMISARIA
 comisarias_out["ESTABLECIMIENTO"] = comisarias_out["COMISARIA"]
 
-# Eliminar columna CATEGORIA si existe
-for df_out in [servicios_out, comisarias_out]:
-    if "CATEGORIA" in df_out.columns:
-        df_out = df_out.drop(columns=["CATEGORIA"])
-    # Rellenar valores faltantes
-    df_out.fillna("NO DISPONIBLE", inplace=True)
-
 # Asignar tipo
 servicios_out["TIPO"] = "SERVICIO DE AYUDA"
 comisarias_out["TIPO"] = "COMISARIA"
@@ -113,15 +106,24 @@ comisarias_out["TIPO"] = "COMISARIA"
 # Unir ambas bases
 consolidado = pd.concat([servicios_out, comisarias_out], ignore_index=True)
 
+# Eliminar columnas
+df = df.drop(columns=["CATEGORIA"])
+df = df.drop(columns=["COMISARIA"])
+
 # Asegurar que todos los NaN (si quedaran) estén cubiertos
 consolidado.fillna("NO DISPONIBLE", inplace=True)
 
 # Botón de descarga consolidado
+output = io.BytesIO()
+with pd.ExcelWriter(output, engine="xlsxwriter") as writer:
+    consolidado.to_excel(writer, index=False, sheet_name="Resultados")
+output.seek(0)
+
 st.download_button(
     label="⬇️ Descargar todos los resultados filtrados (Excel)",
-    data=consolidado.to_csv(index=False).encode('utf-8'),
-    file_name="servicios_y_comisarias_filtrados.csv",
-    mime="text/csv"
+    data=output,
+    file_name="servicios_y_comisarias_filtrados.xlsx",
+    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 )
 
 st.subheader("🌐 Canales digitales")
