@@ -89,6 +89,26 @@ st.download_button(
     mime="text/csv"
 )
 
+# --- DESCARGA CONSOLIDADA ---
+st.subheader("📦 Descarga completa")
+
+# Crear una copia con etiqueta de tipo
+servicios_out = establecimientos_filtrado.copy()
+servicios_out["TIPO"] = "SERVICIO DE AYUDA"
+
+comisarias_out = comisarias_filtrado.copy()
+comisarias_out["TIPO"] = "COMISARÍA"
+
+# Unir ambas bases
+consolidado = pd.concat([servicios_out, comisarias_out], ignore_index=True)
+
+# Botón de descarga
+st.download_button(
+    label="⬇️ Descargar todos los resultados filtrados (Excel)",
+    data=consolidado.to_csv(index=False).encode('utf-8'),
+    file_name="servicios_y_comisarias_filtrados.csv",
+    mime="text/csv"
+)
 st.subheader("🌐 Canales digitales")
 
 st.markdown("""
