@@ -124,6 +124,10 @@ consolidado = consolidado.drop(columns=["COMISARIA"])
 # Asegurar que todos los NaN (si quedaran) estén cubiertos
 consolidado.fillna("NO DISPONIBLE", inplace=True)
 
+# Ordenamos base consolidada
+columnas = ["TIPO"] + [col for col in consolidado.columns if col != "TIPO"]
+consolidado = consolidado[columnas]
+
 # Botón de descarga consolidado
 output = io.BytesIO()
 with pd.ExcelWriter(output, engine="openpyxl") as writer:
