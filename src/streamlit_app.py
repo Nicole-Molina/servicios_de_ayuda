@@ -92,23 +92,38 @@ st.download_button(
 # --- DESCARGA CONSOLIDADA ---
 st.subheader("📦 Descarga completa")
 
-# Crear una copia con etiqueta de tipo
+# Copias de los filtrados
 servicios_out = establecimientos_filtrado.copy()
-servicios_out["TIPO"] = "SERVICIO DE AYUDA"
-
 comisarias_out = comisarias_filtrado.copy()
-comisarias_out["TIPO"] = "COMISARÍA"
+
+# En comisarías: crear la columna ESTABLECIMIENTO a partir de COMISARIA
+comisarias_out["ESTABLECIMIENTO"] = comisarias_out["COMISARIA"]
+
+# Eliminar columna CATEGORIA si existe
+for df_out in [servicios_out, comisarias_out]:
+    if "CATEGORIA" in df_out.columns:
+        df_out = df_out.drop(columns=["CATEGORIA"])
+    # Rellenar valores faltantes
+    df_out.fillna("NO DISPONIBLE", inplace=True)
+
+# Asignar tipo
+servicios_out["TIPO"] = "SERVICIO DE AYUDA"
+comisarias_out["TIPO"] = "COMISARIA"
 
 # Unir ambas bases
 consolidado = pd.concat([servicios_out, comisarias_out], ignore_index=True)
 
-# Botón de descarga
+# Asegurar que todos los NaN (si quedaran) estén cubiertos
+consolidado.fillna("NO DISPONIBLE", inplace=True)
+
+# Botón de descarga consolidado
 st.download_button(
     label="⬇️ Descargar todos los resultados filtrados (Excel)",
     data=consolidado.to_csv(index=False).encode('utf-8'),
     file_name="servicios_y_comisarias_filtrados.csv",
     mime="text/csv"
 )
+
 st.subheader("🌐 Canales digitales")
 
 st.markdown("""
