@@ -16,16 +16,6 @@ def cargar_datos():
     ubigeos = pd.read_excel('./assets/ubigeos_peru.xlsx')
     return establecimientos, comisarias, ubigeos
 
-# --- Reubicar CELULAR DE CONTACTO como sexta columna ---
-if "CELULAR DE CONTACTO" in establecimientos.columns:
-
-    cols = list(establecimientos.columns)      # lista actual
-    cols.remove("CELULAR DE CONTACTO")    # la quitamos
-    cols.insert(5, "CELULAR DE CONTACTO") # posición 5 = sexta columna
-
-    establecimientos = establecimientos[cols]       # reordenamos
-
-
 # --- BOTÓN PARA LIMPIAR CACHÉ Y RECARGAR ---
 st.sidebar.button("🔄 Refrescar datos", on_click=lambda: st.cache_data.clear())
 
@@ -39,6 +29,15 @@ for df in [establecimientos, comisarias, ubigeos]:
         if col in df.columns:
             df[col] = df[col].astype(str).str.strip().str.upper()
 
+# --- Reubicar CELULAR DE CONTACTO como sexta columna ---
+if "CELULAR DE CONTACTO" in establecimientos.columns:
+
+    cols = list(establecimientos.columns)      # lista actual
+    cols.remove("CELULAR DE CONTACTO")    # la quitamos
+    cols.insert(5, "CELULAR DE CONTACTO") # posición 5 = sexta columna
+
+    establecimientos = establecimientos[cols]       # reordenamos
+    
 # --- PANEL DE FILTROS ---
 st.sidebar.header("🔎 Filtros")
 
