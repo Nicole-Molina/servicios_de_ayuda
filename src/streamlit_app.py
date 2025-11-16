@@ -104,22 +104,14 @@ consolidado.fillna("NO DISPONIBLE", inplace=True)
 columnas = ["TIPO"] + [col for col in consolidado.columns if col != "TIPO"]
 consolidado = consolidado[columnas]
 
-# Ordenamos para cambiar posición de "CELULAR DE CONTACTO"
-
-# Nos aseguramos de que la columna exista
+# --- Reubicar CELULAR DE CONTACTO como sexta columna ---
 if "CELULAR DE CONTACTO" in consolidado.columns:
 
-    # Lista de columnas sin tocar aún
-    cols = list(consolidado.columns)
+    cols = list(consolidado.columns)      # lista actual
+    cols.remove("CELULAR DE CONTACTO")    # la quitamos
+    cols.insert(5, "CELULAR DE CONTACTO") # posición 5 = sexta columna
 
-    # Quitamos la columna objetivo
-    cols.remove("CELULAR DE CONTACTO")
-
-    # Insertamos en posición 5 (que es la sexta columna porque empieza en 0)
-    cols.insert(4, "CELULAR DE CONTACTO")
-
-    # Reordenamos
-    consolidado = consolidado[cols]
+    consolidado = consolidado[cols]       # reordenamos
 
 
 # Botón de descarga consolidado
@@ -144,6 +136,7 @@ st.markdown("""
     - **Central única de denuncias:** Marcar 1818 desde tu celular o teléfono fijo — Canal de consulta y/o denuncia abierto a casos de violencia.  
     - **Chat 100:** https://chat100.warminan.gob.pe/ — Chat gratuito 24 horas para orientación gratuita respecto de prevención y ayuda en situaciones de violencia.    
     - **Yanapp:** https://www.gob.pe/institucion/mimp/campa%C3%B1as/30521-yanapp-conectada-y-en-confianza - Aplicativo móvil que ofrece orientación e información sobre servicios de ayuda y denuncia cercanos a uno.
+    
     📱 Puedes acceder a ellos desde tu celular o computadora en cualquier momento.
     """)
 
