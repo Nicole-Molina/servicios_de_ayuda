@@ -69,36 +69,6 @@ def filtrar_datos(df):
 establecimientos_filtrado = filtrar_datos(establecimientos)
 comisarias_filtrado = filtrar_datos(comisarias)
 
-# --- RESULTADOS ---
-st.subheader("♀️ Servicios de ayuda disponibles")
-st.dataframe(establecimientos_filtrado, use_container_width=True)
-
-output_servicios = io.BytesIO()
-with pd.ExcelWriter(output_servicios, engine="openpyxl") as writer:
-    establecimientos_filtrado.to_excel(writer, index=False, sheet_name="Servicios de ayuda")
-output_servicios.seek(0)
-
-st.download_button(
-    label="⬇️ Descargar servicios filtrados (Excel)",
-    data=output_servicios,
-    file_name="servicios_filtrados.xlsx",
-    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-)
-
-st.subheader("👮 Comisarías disponibles")
-st.dataframe(comisarias_filtrado, use_container_width=True)
-
-output_comisarias = io.BytesIO()
-with pd.ExcelWriter(output_comisarias, engine="openpyxl") as writer:
-    comisarias_filtrado.to_excel(writer, index=False, sheet_name="Comisarías")
-output_comisarias.seek(0)
-
-st.download_button(
-    label="⬇️ Descargar comisarías filtradas (Excel)",
-    data=output_comisarias,
-    file_name="comisarias_filtradas.xlsx",
-    mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-)
 
 # --- DESCARGA CONSOLIDADA ---
 st.subheader("📦 Descarga completa")
@@ -149,7 +119,7 @@ st.markdown("""
     - **Línea 100:** Marcar 100 desde tu celular o teléfono fijo — Atención gratuita 24 horas para personas que experimenten o conozcan casos de violencia.  
     - **Central única de denuncias:** Marcar 1818 desde tu celular o teléfono fijo — Canal de consulta y/o denuncia abierto a casos de violencia.  
     - **Chat 100:** https://chat100.warminan.gob.pe/ — Chat gratuito 24 horas para orientación gratuita respecto de prevención y ayuda en situaciones de violencia.    
-
+    - **Yanapp:** https://www.gob.pe/institucion/mimp/campa%C3%B1as/30521-yanapp-conectada-y-en-confianza - Aplicativo móvil que ofrece orientación e información sobre servicios de ayuda y denuncia cercanos a uno.
     📱 Puedes acceder a ellos desde tu celular o computadora en cualquier momento.
     """)
 
