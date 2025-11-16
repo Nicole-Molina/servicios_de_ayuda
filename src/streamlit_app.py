@@ -116,7 +116,7 @@ if "CELULAR DE CONTACTO" in consolidado.columns:
     cols.remove("CELULAR DE CONTACTO")
 
     # Insertamos en posición 5 (que es la sexta columna porque empieza en 0)
-    cols.insert(5, "CELULAR DE CONTACTO")
+    cols.insert(4, "CELULAR DE CONTACTO")
 
     # Reordenamos
     consolidado = consolidado[cols]
