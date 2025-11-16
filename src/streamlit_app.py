@@ -104,6 +104,24 @@ consolidado.fillna("NO DISPONIBLE", inplace=True)
 columnas = ["TIPO"] + [col for col in consolidado.columns if col != "TIPO"]
 consolidado = consolidado[columnas]
 
+# Ordenamos para cambiar posición de "CELULAR DE CONTACTO"
+
+# Nos aseguramos de que la columna exista
+if "CELULAR DE CONTACTO" in consolidado.columns:
+
+    # Lista de columnas sin tocar aún
+    cols = list(consolidado.columns)
+
+    # Quitamos la columna objetivo
+    cols.remove("CELULAR DE CONTACTO")
+
+    # Insertamos en posición 5 (que es la sexta columna porque empieza en 0)
+    cols.insert(5, "CELULAR DE CONTACTO")
+
+    # Reordenamos
+    consolidado = consolidado[cols]
+
+
 # Botón de descarga consolidado
 output = io.BytesIO()
 with pd.ExcelWriter(output, engine="openpyxl") as writer:
