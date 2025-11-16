@@ -69,6 +69,12 @@ def filtrar_datos(df):
 establecimientos_filtrado = filtrar_datos(establecimientos)
 comisarias_filtrado = filtrar_datos(comisarias)
 
+# --- RESULTADOS ---
+st.subheader("♀️ Servicios de ayuda disponibles")
+st.dataframe(establecimientos_filtrado, use_container_width=True)
+
+st.subheader("👮 Comisarías disponibles")
+st.dataframe(comisarias_filtrado, use_container_width=True)
 
 # --- DESCARGA CONSOLIDADA ---
 st.subheader("📦 Descarga completa")
